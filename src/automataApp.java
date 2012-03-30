@@ -13,19 +13,21 @@ import javax.swing.JOptionPane;
 public class automataApp extends javax.swing.JFrame {
 
     
-    protected int[][] matrizTrans;
-    protected int estado;
+    private int[][] matrizTrans;
+    int estado;
     /**
      * Creates new form automataApp
      */
     public automataApp() {
         initComponents();
         //Inicializar variables
-        matrizTrans[0][0] = 1; matrizTrans[0][1] = 4; matrizTrans[0][2] = -1;
-        matrizTrans[1][0] = 4; matrizTrans[1][1] = 3; matrizTrans[1][2] = -1;
+        matrizTrans = new int[4][3];
+        matrizTrans[0][0] = 1; matrizTrans[0][1] = 3; matrizTrans[0][2] = -1;
+        matrizTrans[1][0] = 3; matrizTrans[1][1] = 2; matrizTrans[1][2] = -1;
         matrizTrans[2][0] = -1; matrizTrans[2][1] = -1; matrizTrans[2][2] = -1;
-        matrizTrans[3][0] = 3; matrizTrans[3][1] = -1; matrizTrans[3][2] = -1;
-        estado = -1;
+        matrizTrans[3][0] = 2; matrizTrans[3][1] = -1; matrizTrans[3][2] = -1;
+        estado = 0;
+        jLabel3.setText(String.valueOf(estado));
     }
 
     /**
@@ -41,12 +43,15 @@ public class automataApp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10" }));
 
-        jLabel1.setText("Seleccione valor de la moneda");
+        jLabel1.setText("Automata de refrescos que solo recibe monedas de $5 y $10 hasta llegar a un valor de $15");
 
         jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -56,34 +61,66 @@ public class automataApp extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Estado:");
+
+        jLabel3.setText("1");
+
+        jLabel4.setText("Seleccione valor de la moneda:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(220, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(33, 33, 33)
+                                    .addComponent(jButton1)
+                                    .addGap(96, 96, 96)
+                                    .addComponent(jButton2)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(72, 72, 72)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(208, Short.MAX_VALUE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
@@ -91,7 +128,9 @@ public class automataApp extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Obtiene valor desde el jComboBox:
-        switch(Integer.parseInt(jComboBox1.getSelectedItem().toString())){
+        int x;
+        x = Integer.parseInt(jComboBox1.getSelectedItem().toString());
+        switch(x){
             case 5:{
                 asumiendoValores(0);
                 break;
@@ -102,21 +141,29 @@ public class automataApp extends javax.swing.JFrame {
             }           
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Boton cancelar:
+        JOptionPane.showMessageDialog(rootPane, "Hasta luego \nATTE: Oviedo");
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
    
     
     private void asumiendoValores(int val){
-        estado = matrizTrans[estado][val]; 
+        estado = matrizTrans[estado][val];         
         switch(estado){
             case -1:{
                 JOptionPane.showMessageDialog(rootPane, "Error!");
                 break;
             }
-            case 3:{
+            case 2:{
                 JOptionPane.showMessageDialog(rootPane, "Refresco!");
-                break;
+                jComboBox1.setEnabled(false);
+                jButton1.setEnabled(false);
+                break;               
             }
         }
-            
+        jLabel3.setText(String.valueOf(estado));            
     }
     /**
      * @param args the command line arguments
@@ -164,5 +211,8 @@ public class automataApp extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
