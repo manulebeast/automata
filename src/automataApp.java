@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication3;
+
 
 /**
  *
@@ -41,6 +41,8 @@ public class automataApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        int valor;
+        System.out.println("Introduce un valor:");
+        valor = System.in.read();
     }
 }
