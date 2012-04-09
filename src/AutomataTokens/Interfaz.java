@@ -4,17 +4,31 @@
  */
 package AutomataTokens;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Administrador
  */
 public class Interfaz extends javax.swing.JFrame {
-
+private int[][] matrizEst;
+private int estado;
+char caracter;
+int indice; 
+int bandera;
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
-        initComponents();
+        initComponents();        
+        indice = 0; 
+        bandera = 0;
+        matrizEst = new int [3][4];
+        matrizEst[0][0] = 1; matrizEst[0][1] = -1; matrizEst[0][2] = -1; matrizEst[0][3] = -1;
+        matrizEst[1][0] = 1; matrizEst[1][1] = 1; matrizEst[1][2] = 1; matrizEst[1][3] = 2;
+        matrizEst[2][0] = -1; matrizEst[2][1] = -1; matrizEst[2][2] = -1; matrizEst[2][3] = -1;
+        estado = 0;
+        jLabel6.setText(String.valueOf(estado));
     }
 
     /**
@@ -26,21 +40,232 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        jLabel1.setText("Introduzca una cadena de texto");
+
+        jLabel2.setFont(new java.awt.Font("Rockwell Extra Bold", 3, 48)); // NOI18N
+
+        jButton1.setText("Procesar texto");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Programa que procesa una cadena de texto, la evalua y de clara si es apta para ser variable");
+
+        jLabel5.setText("Estado:");
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AutomataTokens/restart.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2))
+                                    .addComponent(jTextField1)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(115, 115, 115)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)
+                                        .addComponent(jButton3)))
+                                .addGap(0, 5, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(31, 31, 31))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Procesa(){                               
+        caracter = jTextField1.getText().toString().charAt(indice);                                                              
+            if ((caracter >= 0)&&(caracter <= 9)){
+                validaEstados(1);
+            }
+            if((caracter >= 97) && (caracter <= 122) || (caracter >= 65) && (caracter <= 90)){
+                validaEstados(0);
+            }         
+            if(caracter == 95){
+                validaEstados(2);
+            }
+            if(caracter == '#'){
+                validaEstados(3);                
+            }                            
+            jLabel2.setText(String.valueOf(caracter));
+            indice ++;
+            caracter = jTextField1.getText().toString().charAt(indice);                      
+    }
+    private void limpiaTodo(){        
+        estado = 0;
+        jLabel6.setText(String.valueOf(estado));
+        jLabel2.setVisible(false);
+        jTextField1.setText(null);
+        indice = 0;
+        bandera = 0;
+    }
+    
+    private void validaEstados(int val){
+            //Asumiendo nuevos estados
+            estado = matrizEst[estado][val];  
+            jLabel6.setText(String.valueOf(estado));
+            switch(estado){
+             case -1:{
+                JOptionPane.showMessageDialog(rootPane, "Error!");                
+                if(JOptionPane.showConfirmDialog(rootPane, "Volver a procesar otra cadena?", "Reintentar", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
+                    limpiaTodo();
+                }
+                else{                    
+                    System.exit(0);
+                }
+                break;
+            }
+            case 2:{
+                JOptionPane.showMessageDialog(rootPane, "Cadena valida!");
+                if(JOptionPane.showConfirmDialog(rootPane, "Volver a procesar otra cadena?", "Reintentar", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
+                    limpiaTodo();
+                }
+                else{
+                    System.exit(0);
+                }
+                break;               
+            }
+        }         
+    }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Presion del boton SALIR
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+         
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jTextField1.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "No haz ingresado cadena aun");
+        }
+        else{
+        if(bandera != 1){
+        jTextField1.setText(jTextField1.getText()+"#");
+        bandera = 1;
+        jLabel2.setVisible(true);
+        }
+        // Al presionar el boton procesar        
+        Procesa();        
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER){
+        if(jTextField1.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "No haz ingresado cadena aun");
+        } 
+        else{
+        if(bandera != 1){
+        jTextField1.setText(jTextField1.getText()+"#");
+        bandera = 1;
+        jLabel2.setVisible(true);
+        }
+        //Al presionar enter Actuara como si presiono el boton de procesar texto        
+            Procesa();        
+            }
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(jTextField1.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "No haz ingresado cadena aun");
+        }
+        else{        
+        if(bandera != 1){
+            jTextField1.setText(jTextField1.getText()+"#");
+            bandera = 1;
+            jLabel2.setVisible(true);
+             }
+        Procesa();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -84,5 +309,14 @@ public class Interfaz extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
