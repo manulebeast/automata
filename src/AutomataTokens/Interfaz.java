@@ -11,8 +11,8 @@ import javax.swing.JOptionPane;
  * @author Administrador
  */
 public class Interfaz extends javax.swing.JFrame {
-private int[][] matrizEst;
-private int estado;
+int[][] matrizEst;
+int estado;
 char caracter;
 int indice; 
 int bandera;
@@ -43,11 +43,12 @@ int bandera;
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Procesar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        PasoaPaso = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,10 +66,10 @@ int bandera;
 
         jLabel2.setFont(new java.awt.Font("Rockwell Extra Bold", 3, 48)); // NOI18N
 
-        jButton1.setText("Procesar texto");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Procesar.setText("Procesar texto");
+        Procesar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ProcesarActionPerformed(evt);
             }
         });
 
@@ -83,7 +84,14 @@ int bandera;
 
         jLabel5.setText("Estado:");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AutomataTokens/restart.png"))); // NOI18N
+        PasoaPaso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AutomataTokens/restart.png"))); // NOI18N
+        PasoaPaso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasoaPasoActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Limpiar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -104,7 +112,7 @@ int bandera;
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
+                                        .addComponent(Procesar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton2))
                                     .addComponent(jTextField1)))
@@ -115,14 +123,15 @@ int bandera;
                                         .addGap(115, 115, 115)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(37, 37, 37)
-                                        .addComponent(jButton3)))
-                                .addGap(0, 5, Short.MAX_VALUE))))
+                                        .addComponent(PasoaPaso)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -136,17 +145,19 @@ int bandera;
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(Procesar)
                     .addComponent(jButton2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addComponent(PasoaPaso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
@@ -156,31 +167,35 @@ int bandera;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Procesa(){                               
+    private void Procesa(){  
+        System.out.println(indice+"Procesa");
         caracter = jTextField1.getText().toString().charAt(indice);                                                              
-            if ((caracter >= 0)&&(caracter <= 9)){
+        jLabel2.setText(String.valueOf(caracter));
+            if ((caracter >= '0')&&(caracter <= '9')){
                 validaEstados(1);
             }
-            if((caracter >= 97) && (caracter <= 122) || (caracter >= 65) && (caracter <= 90)){
+            if((caracter >= 'a') && (caracter <= 'z') || (caracter >= 'A') && (caracter <= 'Z')){
                 validaEstados(0);
             }         
-            if(caracter == 95){
+            if(caracter == '_'){
                 validaEstados(2);
             }
             if(caracter == '#'){
                 validaEstados(3);                
-            }                            
-            jLabel2.setText(String.valueOf(caracter));
+            }                                        
             indice ++;
-            caracter = jTextField1.getText().toString().charAt(indice);                      
+            //caracter = jTextField1.getText().toString().charAt(indice);                      
     }
     private void limpiaTodo(){        
         estado = 0;
         jLabel6.setText(String.valueOf(estado));
-        jLabel2.setVisible(false);
+        jLabel2.setText(null);
         jTextField1.setText(null);
         indice = 0;
         bandera = 0;
+        caracter = ' ';
+        System.out.println(indice+"Reinicializa");
+        jTextField1.requestFocus();
     }
     
     private void validaEstados(int val){
@@ -189,26 +204,15 @@ int bandera;
             jLabel6.setText(String.valueOf(estado));
             switch(estado){
              case -1:{
-                JOptionPane.showMessageDialog(rootPane, "Error!");                
-                if(JOptionPane.showConfirmDialog(rootPane, "Volver a procesar otra cadena?", "Reintentar", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-                    limpiaTodo();
-                }
-                else{                    
-                    System.exit(0);
-                }
+                JOptionPane.showMessageDialog(rootPane, "Error!"); 
                 break;
             }
             case 2:{
-                JOptionPane.showMessageDialog(rootPane, "Cadena valida!");
-                if(JOptionPane.showConfirmDialog(rootPane, "Volver a procesar otra cadena?", "Reintentar", JOptionPane.YES_NO_OPTION)== JOptionPane.YES_OPTION){
-                    limpiaTodo();
-                }
-                else{
-                    System.exit(0);
-                }
+                JOptionPane.showMessageDialog(rootPane, "Cadena valida!");                
                 break;               
             }
         }         
+            System.out.println(indice+"De las decisiones");
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -220,20 +224,20 @@ int bandera;
          
     }//GEN-LAST:event_jTextField1KeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesarActionPerformed
         if(jTextField1.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "No haz ingresado cadena aun");
         }
         else{
         if(bandera != 1){
         jTextField1.setText(jTextField1.getText()+"#");
-        bandera = 1;
-        jLabel2.setVisible(true);
+        bandera = 1;        
         }
         // Al presionar el boton procesar        
         Procesa();        
+        System.out.println(indice+"botonProcesar");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ProcesarActionPerformed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         if (evt.getKeyCode() == evt.VK_ENTER){
@@ -243,16 +247,16 @@ int bandera;
         else{
         if(bandera != 1){
         jTextField1.setText(jTextField1.getText()+"#");
-        bandera = 1;
-        jLabel2.setVisible(true);
+        bandera = 1;        
         }
         //Al presionar enter Actuara como si presiono el boton de procesar texto        
             Procesa();        
+            System.out.println(indice+"Boton Enter");
             }
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void PasoaPasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasoaPasoActionPerformed
         // TODO add your handling code here:
         if(jTextField1.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "No haz ingresado cadena aun");
@@ -260,11 +264,15 @@ int bandera;
         else{        
         if(bandera != 1){
             jTextField1.setText(jTextField1.getText()+"#");
-            bandera = 1;
-            jLabel2.setVisible(true);
+            bandera = 1;            
              }
         Procesa();
+        System.out.println(indice+"PasoaPaso");
         }
+    }//GEN-LAST:event_PasoaPasoActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        limpiaTodo();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -309,7 +317,8 @@ int bandera;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton PasoaPaso;
+    private javax.swing.JButton Procesar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
