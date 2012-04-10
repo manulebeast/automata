@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Automata Tokens programa que analiza una cadena de caracteres la evalua y dicta si 
+ * es apta para ser declarada como variable
  */
 package AutomataTokens;
 
